@@ -1,0 +1,95 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:BlossomiShymae.SkipNSlash.Desktop.ViewModels"
+        xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="BlossomiShymae.SkipNSlash.Desktop.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        TransparencyLevelHint="AcrylicBlur"
+        Icon="/Assets/app.ico"
+        Title="Skip 'n Slash"
+        Width="1280"
+        MinWidth="1280"
+        Height="720">
+    <ExperimentalAcrylicBorder>
+        <ExperimentalAcrylicBorder.Material>
+            <ExperimentalAcrylicMaterial
+                BackgroundSource="Digger"
+                TintColor="Black"
+                TintOpacity="1"
+                MaterialOpacity="0.4" />
+        </ExperimentalAcrylicBorder.Material>
+        <!-- TOPLEVEL-->
+        <Grid
+            Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <!-- SEARCH BAR-->
+            <Grid
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    ItemsSource="{Binding GameVersions}"
+                    SelectedItem="{Binding SelectedVersion}"
+                    Margin="0,0,8,0" />
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,0,8,0"
+                    Text="{Binding Search}" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    IsDefault="true"
+                    HorizontalAlignment="Stretch"
+                    Command="{Binding SearchFilesCommand}">
+                    <materialIcons:MaterialIcon
+                        Kind="Magnify"
+                        Width="20"
+                        Height="20" />
+                </Button>
+            </Grid>
+            <!-- SEARCH RESULTS-->
+            <ListBox
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="0,0,0,8"
+                ItemsSource="{Binding Results}"
+                SelectedItem="{Binding SelectedResult}" />
+            <!-- STATUS BAR-->
+            <Grid
+                Grid.Row="2"
+                Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="{Binding Status}" />
+            </Grid>
+        </Grid>
+    </ExperimentalAcrylicBorder>
+</Window>
